@@ -28,6 +28,25 @@ public class ScipCSharpSyntaxWalker : CSharpSyntaxWalker
         base.VisitIdentifierName(node);
     }
 
+    public override void VisitGenericName(GenericNameSyntax node)
+    {
+        // `Create<int>()`, `List<int>`, `typeof(List<>)`: a name carrying type arguments is a
+        // GenericNameSyntax, not an IdentifierNameSyntax, so without this override the invoked
+        // method or referenced type produced no occurrence at all -- only its type arguments did.
+        // The occurrence is attributed to the DEFINITION symbol: a constructed method
+        // (`Create<int>`) or a reduced extension method (`value.As<T>()`) is a distinct ISymbol
+        // that never equals a member of its containing type, so its overload disambiguator
+        // would come out empty and point at the wrong overload.
+        var symbol = _semanticModel.GetSymbolInfo(node).Symbol;
+        if (symbol is IMethodSymbol method)
+        {
+            symbol = method.ReducedFrom ?? method.OriginalDefinition;
+        }
+
+        _scipDocumentIndexer.VisitOccurrence(symbol, node.Identifier.GetLocation(), false);
+        base.VisitGenericName(node);
+    }
+
     public override void VisitClassDeclaration(ClassDeclarationSyntax node)
     {
         _scipDocumentIndexer.VisitOccurrence(_semanticModel.GetDeclaredSymbol(node), node.Identifier.GetLocation(), true);
