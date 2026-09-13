@@ -74,6 +74,15 @@ public class ScipDocumentIndexer
             return ScipSymbol.Empty;
         }
 
+        if (sym is IMethodSymbol method)
+        {
+            // A constructed method (`Create<int>`, or `Create(1)` with inferred type arguments) and a
+            // reduced extension method (`value.As<T>()`) are distinct ISymbols from the method they were
+            // formed from: they equal no member of their containing type, so the overload disambiguator
+            // came out empty, and a generic local function got a fresh local id at every call.
+            sym = (method.ReducedFrom ?? method).OriginalDefinition;
+        }
+
         var fromCache = _globals.GetValueOrDefault(sym, ScipSymbol.Empty);
         if (fromCache != ScipSymbol.Empty)
         {
@@ -177,24 +186,20 @@ public class ScipDocumentIndexer
 
     private static string MethodDisambiguator(ISymbol sym)
     {
-        if (sym is not IMethodSymbol method)
+        if (sym is not IMethodSymbol)
         {
             return "";
         }
 
-        // A constructed method (`Create<int>`, or `Create(1)` with inferred type arguments) and a
-        // reduced extension method (`value.As<T>()`) never equal a member of their containing
-        // type, so the overload is counted against the definition they were formed from.
-        var definition = (method.ReducedFrom ?? method).OriginalDefinition;
         var overloadCount = 0;
-        foreach (var member in definition.ContainingType.GetMembers())
+        foreach (var member in sym.ContainingType.GetMembers())
         {
-            if (member.Equals(definition, SymbolEqualityComparer.Default))
+            if (member.Equals(sym, SymbolEqualityComparer.Default))
             {
                 return overloadCount == 0 ? "" : $"+{overloadCount}";
             }
 
-            if (member.Name.Equals(definition.Name))
+            if (member.Name.Equals(sym.Name))
             {
                 overloadCount++;
             }
