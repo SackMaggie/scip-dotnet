@@ -177,20 +177,24 @@ public class ScipDocumentIndexer
 
     private static string MethodDisambiguator(ISymbol sym)
     {
-        if (sym is not IMethodSymbol)
+        if (sym is not IMethodSymbol method)
         {
             return "";
         }
 
+        // A constructed method (`Create<int>`, or `Create(1)` with inferred type arguments) and a
+        // reduced extension method (`value.As<T>()`) never equal a member of their containing
+        // type, so the overload is counted against the definition they were formed from.
+        var definition = (method.ReducedFrom ?? method).OriginalDefinition;
         var overloadCount = 0;
-        foreach (var member in sym.ContainingType.GetMembers())
+        foreach (var member in definition.ContainingType.GetMembers())
         {
-            if (member.Equals(sym, SymbolEqualityComparer.Default))
+            if (member.Equals(definition, SymbolEqualityComparer.Default))
             {
                 return overloadCount == 0 ? "" : $"+{overloadCount}";
             }
 
-            if (member.Name.Equals(sym.Name))
+            if (member.Name.Equals(definition.Name))
             {
                 overloadCount++;
             }
