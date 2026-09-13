@@ -30,6 +30,9 @@ public class GenericNameUsage
         var inferredSeed = GenericNames.Create(seeded);
         var projected = _items.Select(item => item);
         var indexed = _items.Select((item, position) => item + position);
+        T Echo<T>(T value) => value;
+        var echoed = Echo<int>(1);
+        var inferredEcho = Echo(2);
         var ints = _items.OfType<int>().ToList();
         var unbound = typeof(List<>);
         IEnumerable<int> sequence = _items;

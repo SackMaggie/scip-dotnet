@@ -162,24 +162,42 @@
 //                                                    documentation ```cs\nint position\n```
 //                                                        ^^^^ reference local 21
 //                                                               ^^^^^^^^ reference local 22
+          T Echo<T>(T value) => value;
+//        ^ reference local 24
+//          ^^^^ definition local 23
+//               documentation ```cs\nT Echo<T>(T value)\n```
+//               ^ definition local 24
+//                 documentation ```cs\nT\n```
+//                  ^ reference local 24
+//                    ^^^^^ definition local 25
+//                          documentation ```cs\nT value\n```
+//                              ^^^^^ reference local 25
+          var echoed = Echo<int>(1);
+//            ^^^^^^ definition local 26
+//                   documentation ```cs\nint echoed\n```
+//                     ^^^^ reference local 23
+          var inferredEcho = Echo(2);
+//            ^^^^^^^^^^^^ definition local 27
+//                         documentation ```cs\nint inferredEcho\n```
+//                           ^^^^ reference local 23
           var ints = _items.OfType<int>().ToList();
-//            ^^^^ definition local 23
+//            ^^^^ definition local 28
 //                 documentation ```cs\nList<int>? ints\n```
 //                   ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_items.
 //                          ^^^^^^ reference scip-dotnet nuget System.Linq 9.0.0.0 Linq/Enumerable#OfType().
 //                                        ^^^^^^ reference scip-dotnet nuget System.Linq 9.0.0.0 Linq/Enumerable#ToList().
           var unbound = typeof(List<>);
-//            ^^^^^^^ definition local 24
+//            ^^^^^^^ definition local 29
 //                    documentation ```cs\nType? unbound\n```
 //                             ^^^^ reference scip-dotnet nuget System.Collections 9.0.0.0 Generic/List#
           IEnumerable<int> sequence = _items;
 //        ^^^^^^^^^^^ reference scip-dotnet nuget System.Runtime 9.0.0.0 Generic/IEnumerable#
-//                         ^^^^^^^^ definition local 25
+//                         ^^^^^^^^ definition local 30
 //                                  documentation ```cs\nIEnumerable<int> sequence\n```
 //                                    ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_items.
           _index[converted] = ints;
 //        ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_index.
 //               ^^^^^^^^^ reference local 8
-//                            ^^^^ reference local 23
+//                            ^^^^ reference local 28
       }
   }
