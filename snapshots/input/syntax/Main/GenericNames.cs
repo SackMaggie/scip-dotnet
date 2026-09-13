@@ -10,6 +10,7 @@ public static class GenericNames
 public static class GenericNameExtensions
 {
     public static T As<T>(this object value) where T : class => (T)value;
+    public static T As<T>(this object value, T fallback) where T : class => value as T ?? fallback;
 }
 
 public class GenericNameUsage
@@ -24,6 +25,11 @@ public class GenericNameUsage
         var converted = GenericNames.Convert<int, string>(seeded, value => value.ToString());
         object boxed = this;
         var unboxed = boxed.As<GenericNameUsage>();
+        var fallback = boxed.As<GenericNameUsage>(this);
+        var inferredFallback = boxed.As(this);
+        var inferredSeed = GenericNames.Create(seeded);
+        var projected = _items.Select(item => item);
+        var indexed = _items.Select((item, position) => item + position);
         var ints = _items.OfType<int>().ToList();
         var unbound = typeof(List<>);
         IEnumerable<int> sequence = _items;
