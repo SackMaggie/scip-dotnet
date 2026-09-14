@@ -62,18 +62,23 @@ public sealed class ProjectOutcomes
         });
     }
 
-    /// <summary>Every reason a project's restore or load failed that the run can read without
-    /// interpreting console output: NuGet's error logs for the project, then the workspace's load
-    /// failures that name the project's file.</summary>
-    public static List<string> FailureReasons(string projectPath, MSBuildWorkspace workspace)
+    /// <summary>Why a project's restore or load failed, read without interpreting console output:
+    /// NuGet's error logs for the project when its restore failed -- the cause, which the workspace's
+    /// load failure only repeats -- and otherwise the workspace's load failures that name the
+    /// project's file, with that file named relative to the working directory.</summary>
+    public static List<string> FailureReasons(FileInfo workingDirectory, string projectPath,
+        MSBuildWorkspace workspace)
     {
         var reasons = RestoreErrors(projectPath);
-        reasons.AddRange(workspace.Diagnostics
+        if (reasons.Count > 0) return reasons;
+        var full = Path.GetFullPath(projectPath);
+        return workspace.Diagnostics
             .Where(d => d.Kind == WorkspaceDiagnosticKind.Failure
-                        && d.Message.Contains(Path.GetFullPath(projectPath), StringComparison.OrdinalIgnoreCase))
-            .Select(d => $"load: {d.Message}")
-            .Distinct(StringComparer.Ordinal));
-        return reasons;
+                        && d.Message.Contains(full, StringComparison.OrdinalIgnoreCase))
+            .Select(d => "load: " + d.Message.Replace(full, Relative(workingDirectory, full),
+                StringComparison.OrdinalIgnoreCase))
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
     }
 
     public static List<string> RestoreErrors(string projectPath)

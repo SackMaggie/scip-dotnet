@@ -167,7 +167,7 @@ public class ScipProjectIndexer
                 // A project the workspace still loaded after a failed restore or design-time build
                 // is indexed from its source files without the references that build resolves, so
                 // its symbols are incomplete and it never reads as indexed.
-                var reasons = ProjectOutcomes.FailureReasons(project.FilePath, workspace);
+                var reasons = ProjectOutcomes.FailureReasons(options.WorkingDirectory, project.FilePath, workspace);
                 if (reasons.Count > 0)
                 {
                     Logger.LogError("Project {ProjectFilePath} was only partially indexed: {Reasons}",
@@ -183,7 +183,7 @@ public class ScipProjectIndexer
             StringComparer.OrdinalIgnoreCase);
         foreach (var path in attempted.Paths().Where(p => !loaded.Contains(p)))
         {
-            var reasons = ProjectOutcomes.FailureReasons(path, workspace);
+            var reasons = ProjectOutcomes.FailureReasons(options.WorkingDirectory, path, workspace);
             if (reasons.Count == 0)
             {
                 reasons.Add("load: the workspace did not load this project and recorded no failure for it");

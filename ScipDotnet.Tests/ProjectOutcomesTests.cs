@@ -31,6 +31,10 @@ public class ProjectOutcomesTests
         var reasons = broken.GetProperty("reasons").EnumerateArray().Select(r => r.GetString()).ToList();
         Assert.That(reasons, Has.Some.StartsWith("restore NU1101:"));
         Assert.That(reasons, Has.Some.Contains("Kb.Fixture.Absent"));
+        // The restore error is the cause; the workspace's load failure only repeats it, and no reason
+        // carries the machine-specific path of the directory the run happened in.
+        Assert.That(reasons, Has.All.StartsWith("restore "));
+        Assert.That(reasons, Has.None.Contains(Path.GetTempPath().TrimEnd(Path.DirectorySeparatorChar)));
     }
 
     [Test]
