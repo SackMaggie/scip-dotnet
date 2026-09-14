@@ -49,6 +49,11 @@ public static class Program
                 @"Provide a case sensitive custom path for ""dotnet restore"" to find the NuGet.config file. " +
                 @"If not provided, ""dotnet restore"" will search for the NuGet.config file recursively up the folder hierarchy " +
                 @"and in the default user and system config locations."),
+            new Option<FileInfo?>("--project-outcomes", () => null,
+                "Write a JSON record of every project this run attempted: whether its restore succeeded, " +
+                "whether its documents were indexed, and each reason a project was not. " +
+                "The indexer exits 0 when a project fails to restore or load, so this record is how a " +
+                "partial index is told apart from a complete one."),
         };
         indexCommand.Handler = CommandHandler.Create(IndexCommandHandler.Process);
         var rootCommand =

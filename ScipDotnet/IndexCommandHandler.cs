@@ -22,7 +22,8 @@ public static class IndexCommandHandler
         bool allowGlobalSymbolDefinitions,
         int dotnetRestoreTimeout,
         bool skipDotnetRestore,
-        FileInfo? nugetConfigPath
+        FileInfo? nugetConfigPath,
+        FileInfo? projectOutcomes
         )
     {
         var logger = host.Services.GetRequiredService<ILogger<IndexCommandOptions>>();
@@ -47,7 +48,8 @@ public static class IndexCommandHandler
             allowGlobalSymbolDefinitions,
             dotnetRestoreTimeout,
             skipDotnetRestore,
-            nugetConfigPath
+            nugetConfigPath,
+            projectOutcomes == null ? null : OutputFile(workingDirectory, projectOutcomes.ToString())
         );
         await ScipIndex(host, options);
 
@@ -100,7 +102,8 @@ public static class IndexCommandHandler
                 TextDocumentEncoding = TextEncoding.Utf8,
             }
         };
-        await foreach (var document in indexer.IndexDocuments(host, options))
+        var outcomes = new ProjectOutcomes();
+        await foreach (var document in indexer.IndexDocuments(host, options, outcomes))
         {
             index.Documents.Add(document);
         }
@@ -111,6 +114,12 @@ public static class IndexCommandHandler
         }
 
         await File.WriteAllBytesAsync(options.Output.FullName, index.ToByteArray());
+        options.Logger.LogInformation("projects: {Indexed} of {Total} indexed",
+            outcomes.Count(ProjectOutcomes.StatusIndexed), outcomes.Total);
+        if (options.ProjectOutcomes != null)
+        {
+            await outcomes.WriteAsync(options.ProjectOutcomes);
+        }
         options.Logger.LogInformation("done: {OptionsOutput} {TimeElapsed}", options.Output,
             stopwatch.Elapsed.ToFriendlyString());
     }

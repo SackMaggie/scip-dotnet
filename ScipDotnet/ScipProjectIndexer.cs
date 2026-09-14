@@ -18,7 +18,7 @@ public class ScipProjectIndexer
 
     private ILogger<ScipProjectIndexer> Logger { get; }
 
-    private void Restore(IndexCommandOptions options, FileInfo project)
+    private (string Status, int? ExitCode) Restore(IndexCommandOptions options, FileInfo project)
     {
         var isSolution = project.Extension.Equals(".sln", StringComparison.OrdinalIgnoreCase)
                       || project.Extension.Equals(".slnx", StringComparison.OrdinalIgnoreCase);
@@ -41,45 +41,78 @@ public class ScipProjectIndexer
         if (!process.WaitForExit(options.DotnetRestoreTimeout))
         {
             Logger.LogWarning("Dotnet restore did not finish in {Time} milliseconds, the results of the indexing might be incorrect.", options.DotnetRestoreTimeout);
+            return (ProjectOutcomes.RestoreTimedOut, null);
         }
+
+        return (process.ExitCode == 0 ? ProjectOutcomes.RestoreSucceeded : ProjectOutcomes.RestoreFailed,
+            process.ExitCode);
     }
 
-    public async IAsyncEnumerable<Scip.Document> IndexDocuments(IHost host, IndexCommandOptions options)
+    public async IAsyncEnumerable<Scip.Document> IndexDocuments(IHost host, IndexCommandOptions options,
+                                                                ProjectOutcomes outcomes)
     {
         var indexedProjects = new HashSet<ProjectId>();
         foreach (var project in options.ProjectsFile)
         {
-            await foreach (var document in IndexProject(host, options, project, indexedProjects))
+            await foreach (var document in IndexProject(host, options, project, indexedProjects, outcomes))
             {
                 yield return document;
             }
         }
     }
 
+    /// <summary>Every project file the workspace began to load, reported synchronously so none
+    /// arrives after the solution is opened.</summary>
+    private sealed class AttemptedProjects : IProgress<ProjectLoadProgress>
+    {
+        private readonly object _gate = new();
+        private readonly List<string> _paths = new();
+
+        public void Add(string path)
+        {
+            lock (_gate)
+            {
+                if (!_paths.Contains(path, StringComparer.OrdinalIgnoreCase)) _paths.Add(path);
+            }
+        }
+
+        public void Report(ProjectLoadProgress value) => Add(value.FilePath);
+
+        public List<string> Paths()
+        {
+            lock (_gate) return new List<string>(_paths);
+        }
+    }
+
     private async IAsyncEnumerable<Scip.Document> IndexProject(IHost host,
                                                                IndexCommandOptions options,
                                                                FileInfo rootProject,
-                                                               HashSet<ProjectId> indexedProjects)
+                                                               HashSet<ProjectId> indexedProjects,
+                                                               ProjectOutcomes outcomes)
     {
-        if (!options.SkipDotnetRestore)
-        {
-            Restore(options, rootProject);
-        }
+        var restore = options.SkipDotnetRestore
+            ? (ProjectOutcomes.RestoreNotRun, (int?)null)
+            : Restore(options, rootProject);
+        outcomes.Root(options.WorkingDirectory, rootProject, restore.Item1, restore.Item2);
 
+        var workspace = host.Services.GetRequiredService<MSBuildWorkspace>();
+        var attempted = new AttemptedProjects();
         var isProjectFile = string.Equals(rootProject.Extension, ".csproj", StringComparison.OrdinalIgnoreCase)
                          || string.Equals(rootProject.Extension, ".vbproj", StringComparison.OrdinalIgnoreCase);
+        if (isProjectFile)
+        {
+            attempted.Add(rootProject.FullName);
+        }
         var projects = (isProjectFile
             ? new[]
             {
-                await host.Services.GetRequiredService<MSBuildWorkspace>()
-                    .OpenProjectAsync(rootProject.FullName)
+                await workspace.OpenProjectAsync(rootProject.FullName, progress: attempted)
             }
-            : (await host.Services.GetRequiredService<MSBuildWorkspace>()
-                .OpenSolutionAsync(rootProject.FullName)).Projects).ToList();
+            : (await workspace.OpenSolutionAsync(rootProject.FullName, progress: attempted)).Projects).ToList();
 
 
         options.Logger.LogDebug($"Found {projects.Count()} projects");
-        var projectsPerProjFile = projects.GroupBy(x => x.FilePath);
+        var projectsPerProjFile = projects.GroupBy(x => x.FilePath).ToList();
         var framework = $"net{Environment.Version.Major}.0";
         foreach (var projectGroup in projectsPerProjFile)
         {
@@ -94,6 +127,12 @@ public class ScipProjectIndexer
                 Logger.LogWarning(
                     "Skipping project {ProjectFilePath} because it has language {ProjectLanguage} and scip-dotnet currently only supports C# and Visual Basic.",
                     project.FilePath, project.Language);
+                if (project.FilePath != null)
+                {
+                    outcomes.Project(options.WorkingDirectory, rootProject, project.FilePath,
+                        ProjectOutcomes.StatusSkipped, 0,
+                        new[] { $"language: {project.Language} is not indexed by scip-dotnet" });
+                }
                 continue;
             }
 
@@ -105,12 +144,14 @@ public class ScipProjectIndexer
             indexedProjects.Add(project.Id);
 
             var globals = new Dictionary<ISymbol, ScipSymbol>(SymbolEqualityComparer.Default);
+            var documents = 0;
 
             options.Logger.LogDebug($"Found {project.Documents.Count()} documents in {projectGroup.Key}");
             foreach (var document in project.Documents)
             {
                 if (options.Matcher.Match(options.WorkingDirectory.FullName, document.FilePath).HasMatches)
                 {
+                    documents++;
                     yield return await IndexDocument(document, options, globals, project.Language);
                 }
                 else
@@ -120,6 +161,35 @@ public class ScipProjectIndexer
                         document.FilePath);
                 }
             }
+
+            if (project.FilePath != null)
+            {
+                // A project the workspace still loaded after a failed restore or design-time build
+                // is indexed from its source files without the references that build resolves, so
+                // its symbols are incomplete and it never reads as indexed.
+                var reasons = ProjectOutcomes.FailureReasons(project.FilePath, workspace);
+                if (reasons.Count > 0)
+                {
+                    Logger.LogError("Project {ProjectFilePath} was only partially indexed: {Reasons}",
+                        project.FilePath, string.Join("; ", reasons));
+                }
+                outcomes.Project(options.WorkingDirectory, rootProject, project.FilePath,
+                    reasons.Count == 0 ? ProjectOutcomes.StatusIndexed : ProjectOutcomes.StatusPartial,
+                    documents, reasons);
+            }
+        }
+
+        var loaded = new HashSet<string>(projectsPerProjFile.Select(g => g.Key).OfType<string>(),
+            StringComparer.OrdinalIgnoreCase);
+        foreach (var path in attempted.Paths().Where(p => !loaded.Contains(p)))
+        {
+            var reasons = ProjectOutcomes.FailureReasons(path, workspace);
+            if (reasons.Count == 0)
+            {
+                reasons.Add("load: the workspace did not load this project and recorded no failure for it");
+            }
+            Logger.LogError("Project {ProjectFilePath} was not indexed: {Reasons}", path, string.Join("; ", reasons));
+            outcomes.Project(options.WorkingDirectory, rootProject, path, ProjectOutcomes.StatusNotIndexed, 0, reasons);
         }
     }
 

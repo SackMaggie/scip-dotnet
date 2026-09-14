@@ -12,5 +12,6 @@ public record IndexCommandOptions(
     bool AllowGlobalSymbolDefinitions,
     int DotnetRestoreTimeout,
     bool SkipDotnetRestore,
-    FileInfo? NugetConfigPath
+    FileInfo? NugetConfigPath,
+    FileInfo? ProjectOutcomes = null
 );
