@@ -97,7 +97,9 @@ public class ScipProjectIndexer
             : Restore(options, rootProject);
         outcomes.Root(options.WorkingDirectory, rootProject, restore.Item1, restore.Item2);
 
-        var workspace = host.Services.GetRequiredService<MSBuildWorkspace>();
+        // One workspace per root, disposed with this root: a solution filter is a batch, and a batch
+        // that stayed loaded while the next one loads is what made the whole solution not fit.
+        using var workspace = MSBuildWorkspace.Create();
         var attempted = new AttemptedProjects();
         var isProjectFile = string.Equals(rootProject.Extension, ".csproj", StringComparison.OrdinalIgnoreCase)
                          || string.Equals(rootProject.Extension, ".vbproj", StringComparison.OrdinalIgnoreCase);
@@ -190,6 +192,28 @@ public class ScipProjectIndexer
             }
             Logger.LogError("Project {ProjectFilePath} was not indexed: {Reasons}", path, string.Join("; ", reasons));
             outcomes.Project(options.WorkingDirectory, rootProject, path, ProjectOutcomes.StatusNotIndexed, 0, reasons);
+        }
+
+        LogWorkspaceDiagnostics(workspace);
+    }
+
+    // MSBuild failures are logged as errors since they often block indexing; warnings as debug,
+    // since they rarely do and are much noisier.
+    private void LogWorkspaceDiagnostics(MSBuildWorkspace workspace)
+    {
+        foreach (var diagnostic in workspace.Diagnostics
+                     .GroupBy(d => new { d.Kind, d.Message })
+                     .Select(g => new { g.Key.Kind, g.Key.Message, Count = g.Count() }))
+        {
+            var message = $"{diagnostic.Kind}: {diagnostic.Message} (occurred {diagnostic.Count} times)";
+            if (diagnostic.Kind == WorkspaceDiagnosticKind.Failure)
+            {
+                Logger.LogError(message);
+            }
+            else
+            {
+                Logger.LogDebug(message);
+            }
         }
     }
 
