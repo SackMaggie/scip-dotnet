@@ -89,31 +89,25 @@ public static class IndexCommandHandler
     {
         var stopwatch = Stopwatch.StartNew();
         var indexer = host.Services.GetRequiredService<ScipProjectIndexer>();
-        var index = new Scip.Index
+        var metadata = new Metadata
         {
-            Metadata = new Metadata
+            ProjectRoot = new Uri(new Uri("file://"), options.WorkingDirectory.FullName).ToString(),
+            ToolInfo = new ToolInfo
             {
-                ProjectRoot = new Uri(new Uri("file://"), options.WorkingDirectory.FullName).ToString(),
-                ToolInfo = new ToolInfo
-                {
-                    Name = "scip-dotnet",
-                    Version = "0.1.0-SNAPSHOT"
-                },
-                TextDocumentEncoding = TextEncoding.Utf8,
-            }
+                Name = "scip-dotnet",
+                Version = "0.1.0-SNAPSHOT"
+            },
+            TextDocumentEncoding = TextEncoding.Utf8,
         };
         var outcomes = new ProjectOutcomes();
-        await foreach (var document in indexer.IndexDocuments(host, options, outcomes))
-        {
-            index.Documents.Add(document);
-        }
+        var written = await WriteIndexFileAsync(options.Output, metadata,
+            indexer.IndexDocuments(host, options, outcomes));
 
-        if (index.Documents.Count <= 0)
+        if (written <= 0)
         {
             options.Logger.LogWarning("Indexing finished without error but no documents were indexed.");
         }
 
-        await File.WriteAllBytesAsync(options.Output.FullName, index.ToByteArray());
         options.Logger.LogInformation("projects: {Indexed} of {Total} indexed",
             outcomes.Count(ProjectOutcomes.StatusIndexed), outcomes.Total);
         if (options.ProjectOutcomes != null)
@@ -122,6 +116,50 @@ public static class IndexCommandHandler
         }
         options.Logger.LogInformation("done: {OptionsOutput} {TimeElapsed}", options.Output,
             stopwatch.Elapsed.ToFriendlyString());
+    }
+
+    // Written beside the output and renamed onto it only once complete, so a run that dies midway
+    // leaves no half an index where a whole one is expected.
+    private const string PartialSuffix = ".partial";
+
+    public static async Task<int> WriteIndexFileAsync(FileInfo output, Metadata metadata,
+        IAsyncEnumerable<Document> documents)
+    {
+        var partial = output.FullName + PartialSuffix;
+        try
+        {
+            int written;
+            await using (var stream = File.Create(partial))
+            {
+                written = await WriteIndexAsync(stream, metadata, documents);
+            }
+            File.Move(partial, output.FullName, overwrite: true);
+            return written;
+        }
+        finally
+        {
+            File.Delete(partial);
+        }
+    }
+
+    /// <summary>Writes the index one document at a time, so no document outlives its own write. The
+    /// bytes are exactly <c>Index.ToByteArray()</c>'s: metadata as field 1, each document as field 2.</summary>
+    public static async Task<int> WriteIndexAsync(Stream output, Metadata metadata,
+        IAsyncEnumerable<Document> documents)
+    {
+        using var coded = new CodedOutputStream(output, leaveOpen: true);
+        coded.WriteTag(Scip.Index.MetadataFieldNumber, WireFormat.WireType.LengthDelimited);
+        coded.WriteMessage(metadata);
+        var written = 0;
+        await foreach (var document in documents)
+        {
+            coded.WriteTag(Scip.Index.DocumentsFieldNumber, WireFormat.WireType.LengthDelimited);
+            coded.WriteMessage(document);
+            coded.Flush();
+            written++;
+        }
+        coded.Flush();
+        return written;
     }
 
     private static string FixThisProblem(string examplePath) =>
