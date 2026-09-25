@@ -51,7 +51,9 @@ public class ScipProjectIndexer
     public async IAsyncEnumerable<Scip.Document> IndexDocuments(IHost host, IndexCommandOptions options,
                                                                 ProjectOutcomes outcomes)
     {
-        var indexedProjects = new HashSet<ProjectId>();
+        // By project file, not ProjectId: every root opens a solution of its own, whose ids are
+        // new, so a project two roots share would otherwise be written once per root.
+        var indexedProjects = new HashSet<string>(StringComparer.Ordinal);
         foreach (var project in options.ProjectsFile)
         {
             await foreach (var document in IndexProject(host, options, project, indexedProjects, outcomes))
@@ -87,7 +89,7 @@ public class ScipProjectIndexer
     private async IAsyncEnumerable<Scip.Document> IndexProject(IHost host,
                                                                IndexCommandOptions options,
                                                                FileInfo rootProject,
-                                                               HashSet<ProjectId> indexedProjects,
+                                                               HashSet<string> indexedProjects,
                                                                ProjectOutcomes outcomes)
     {
         var restore = options.SkipDotnetRestore
@@ -136,12 +138,10 @@ public class ScipProjectIndexer
                 continue;
             }
 
-            if (indexedProjects.Contains(project.Id))
+            if (!indexedProjects.Add(project.FilePath ?? project.Id.Id.ToString()))
             {
                 continue;
             }
-
-            indexedProjects.Add(project.Id);
 
             var globals = new Dictionary<ISymbol, ScipSymbol>(SymbolEqualityComparer.Default);
             var documents = 0;

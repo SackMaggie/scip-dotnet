@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "syntax.sln",
+    "projects": [
+      "Main\\Main.csproj"
+    ]
+  }
+}

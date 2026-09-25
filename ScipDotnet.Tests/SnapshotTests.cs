@@ -182,7 +182,7 @@ public class SnapshotTests
         return process.StandardOutput.ReadToEnd().Trim().Split("\n");
     }
 
-    private static string RootDirectory()
+    internal static string RootDirectory()
     {
         var process = new Process()
         {
