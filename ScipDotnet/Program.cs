@@ -19,8 +19,6 @@ public static class Program
 
     public static async Task<int> Main(string[] args)
     {
-        // Once, before any MSBuild type loads: every root creates its own workspace.
-        MSBuildLocator.RegisterDefaults();
         var indexCommand = new Command("index", "Index a solution file")
         {
             new Argument<FileInfo>("projects", "Path to the .sln/.slnx (solution) or .csproj/.vbproj file")
@@ -76,7 +74,9 @@ public static class Program
                 }).AddFilter("Microsoft.Hosting.Lifetime", LogLevel.None));
                 host.ConfigureServices((_, collection) =>
                     collection
+                        .AddSingleton(_ => CreateWorkspace())
                         .AddTransient<ScipProjectIndexer>()
+                        .AddTransient(services => (Workspace)services.GetRequiredService<MSBuildWorkspace>())
                 );
             })
             .UseDefaults()
@@ -84,4 +84,9 @@ public static class Program
             .InvokeAsync(args);
     }
 
+    private static MSBuildWorkspace CreateWorkspace()
+    {
+        MSBuildLocator.RegisterDefaults();
+        return MSBuildWorkspace.Create();
+    }
 }
