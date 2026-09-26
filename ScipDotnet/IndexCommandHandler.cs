@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Reflection;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -95,7 +96,10 @@ public static class IndexCommandHandler
             ToolInfo = new ToolInfo
             {
                 Name = "scip-dotnet",
-                Version = "0.1.0-SNAPSHOT"
+                // What --version answers (package version + commit), so a reader can tell this
+                // build's index from any other build's.
+                Version = typeof(IndexCommandHandler).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? ""
             },
             TextDocumentEncoding = TextEncoding.Utf8,
         };
