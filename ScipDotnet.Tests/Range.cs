@@ -20,14 +20,18 @@ public record Range(Position Start, Position End) : IComparable<Range>
         return End.CompareTo(other.End);
     }
 
-    public static Range FromOccurrence(Occurrence occ)
+    public static Range FromOccurrence(Occurrence occ) => FromRaw(occ.Range);
+
+    // SCIP's range encoding, shared by `range` and `enclosing_range`: [line, start, end] on one line,
+    // [startLine, startCharacter, endLine, endCharacter] across lines.
+    public static Range FromRaw(IReadOnlyList<int> range)
     {
-        if (occ.Range.Count == 3)
-            return new Range(new Position(occ.Range[0], occ.Range[1]), new Position(occ.Range[0], occ.Range[2]));
+        if (range.Count == 3)
+            return new Range(new Position(range[0], range[1]), new Position(range[0], range[2]));
 
-        if (occ.Range.Count == 4)
-            return new Range(new Position(occ.Range[0], occ.Range[1]), new Position(occ.Range[2], occ.Range[3]));
+        if (range.Count == 4)
+            return new Range(new Position(range[0], range[1]), new Position(range[2], range[3]));
 
-        throw new ArgumentException($"occurrence.range must have length 3 or length 4, obtained {occ.Range}");
+        throw new ArgumentException($"a range must have length 3 or length 4, obtained {range}");
     }
 }

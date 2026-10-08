@@ -50,68 +50,69 @@ namespace Scip {
             "YXRpb25zaGlwIoIBCgxSZWxhdGlvbnNoaXASDgoGc3ltYm9sGAEgASgJEhQK",
             "DGlzX3JlZmVyZW5jZRgCIAEoCBIZChFpc19pbXBsZW1lbnRhdGlvbhgDIAEo",
             "CBIaChJpc190eXBlX2RlZmluaXRpb24YBCABKAgSFQoNaXNfZGVmaW5pdGlv",
-            "bhgFIAEoCCKvAQoKT2NjdXJyZW5jZRINCgVyYW5nZRgBIAMoBRIOCgZzeW1i",
+            "bhgFIAEoCCLIAQoKT2NjdXJyZW5jZRINCgVyYW5nZRgBIAMoBRIOCgZzeW1i",
             "b2wYAiABKAkSFAoMc3ltYm9sX3JvbGVzGAMgASgFEh4KFm92ZXJyaWRlX2Rv",
             "Y3VtZW50YXRpb24YBCADKAkSJQoLc3ludGF4X2tpbmQYBSABKA4yEC5zY2lw",
             "LlN5bnRheEtpbmQSJQoLZGlhZ25vc3RpY3MYBiADKAsyEC5zY2lwLkRpYWdu",
-            "b3N0aWMigAEKCkRpYWdub3N0aWMSIAoIc2V2ZXJpdHkYASABKA4yDi5zY2lw",
-            "LlNldmVyaXR5EgwKBGNvZGUYAiABKAkSDwoHbWVzc2FnZRgDIAEoCRIOCgZz",
-            "b3VyY2UYBCABKAkSIQoEdGFncxgFIAMoDjITLnNjaXAuRGlhZ25vc3RpY1Rh",
-            "ZyoxCg9Qcm90b2NvbFZlcnNpb24SHgoaVW5zcGVjaWZpZWRQcm90b2NvbFZl",
-            "cnNpb24QACpACgxUZXh0RW5jb2RpbmcSGwoXVW5zcGVjaWZpZWRUZXh0RW5j",
-            "b2RpbmcQABIICgRVVEY4EAESCQoFVVRGMTYQAip9CgpTeW1ib2xSb2xlEhkK",
-            "FVVuc3BlY2lmaWVkU3ltYm9sUm9sZRAAEg4KCkRlZmluaXRpb24QARIKCgZJ",
-            "bXBvcnQQAhIPCgtXcml0ZUFjY2VzcxAEEg4KClJlYWRBY2Nlc3MQCBINCglH",
-            "ZW5lcmF0ZWQQEBIICgRUZXN0ECAq6gYKClN5bnRheEtpbmQSGQoVVW5zcGVj",
-            "aWZpZWRTeW50YXhLaW5kEAASCwoHQ29tbWVudBABEhgKFFB1bmN0dWF0aW9u",
-            "RGVsaW1pdGVyEAISFgoSUHVuY3R1YXRpb25CcmFja2V0EAMSCwoHS2V5d29y",
-            "ZBAEEhkKEUlkZW50aWZpZXJLZXl3b3JkEAQaAggBEhYKEklkZW50aWZpZXJP",
-            "cGVyYXRvchAFEg4KCklkZW50aWZpZXIQBhIVChFJZGVudGlmaWVyQnVpbHRp",
-            "bhAHEhIKDklkZW50aWZpZXJOdWxsEAgSFgoSSWRlbnRpZmllckNvbnN0YW50",
-            "EAkSGwoXSWRlbnRpZmllck11dGFibGVHbG9iYWwQChIXChNJZGVudGlmaWVy",
-            "UGFyYW1ldGVyEAsSEwoPSWRlbnRpZmllckxvY2FsEAwSFgoSSWRlbnRpZmll",
-            "clNoYWRvd2VkEA0SFwoTSWRlbnRpZmllck5hbWVzcGFjZRAOEhgKEElkZW50",
-            "aWZpZXJNb2R1bGUQDhoCCAESFgoSSWRlbnRpZmllckZ1bmN0aW9uEA8SIAoc",
-            "SWRlbnRpZmllckZ1bmN0aW9uRGVmaW5pdGlvbhAQEhMKD0lkZW50aWZpZXJN",
-            "YWNybxAREh0KGUlkZW50aWZpZXJNYWNyb0RlZmluaXRpb24QEhISCg5JZGVu",
-            "dGlmaWVyVHlwZRATEhkKFUlkZW50aWZpZXJCdWlsdGluVHlwZRAUEhcKE0lk",
-            "ZW50aWZpZXJBdHRyaWJ1dGUQFRIPCgtSZWdleEVzY2FwZRAWEhEKDVJlZ2V4",
-            "UmVwZWF0ZWQQFxIRCg1SZWdleFdpbGRjYXJkEBgSEgoOUmVnZXhEZWxpbWl0",
-            "ZXIQGRINCglSZWdleEpvaW4QGhIRCg1TdHJpbmdMaXRlcmFsEBsSFwoTU3Ry",
-            "aW5nTGl0ZXJhbEVzY2FwZRAcEhgKFFN0cmluZ0xpdGVyYWxTcGVjaWFsEB0S",
-            "FAoQU3RyaW5nTGl0ZXJhbEtleRAeEhQKEENoYXJhY3RlckxpdGVyYWwQHxIS",
-            "Cg5OdW1lcmljTGl0ZXJhbBAgEhIKDkJvb2xlYW5MaXRlcmFsECESBwoDVGFn",
-            "ECISEAoMVGFnQXR0cmlidXRlECMSEAoMVGFnRGVsaW1pdGVyECQaAhABKlYK",
-            "CFNldmVyaXR5EhcKE1Vuc3BlY2lmaWVkU2V2ZXJpdHkQABIJCgVFcnJvchAB",
-            "EgsKB1dhcm5pbmcQAhIPCgtJbmZvcm1hdGlvbhADEggKBEhpbnQQBCpOCg1E",
-            "aWFnbm9zdGljVGFnEhwKGFVuc3BlY2lmaWVkRGlhZ25vc3RpY1RhZxAAEg8K",
-            "C1VubmVjZXNzYXJ5EAESDgoKRGVwcmVjYXRlZBACKuAICghMYW5ndWFnZRIX",
-            "ChNVbnNwZWNpZmllZExhbmd1YWdlEAASCAoEQUJBUBA8EgcKA0FQTBAxEgcK",
-            "A0FkYRAnEggKBEFnZGEQLRIMCghBc2NpaURvYxBWEgwKCEFzc2VtYmx5EDoS",
-            "BwoDQXdrEEISBwoDQmF0EEQSCgoGQmliVGVYEFESBQoBQxAiEgkKBUNPQk9M",
-            "EDsSBwoDQ1BQECMSBwoDQ1NTEBoSCgoGQ1NoYXJwEAESCwoHQ2xvanVyZRAI",
-            "EhAKDENvZmZlZXNjcmlwdBAVEg4KCkNvbW1vbkxpc3AQCRIHCgNDb3EQLxII",
-            "CgREYXJ0EAMSCgoGRGVscGhpEDkSCAoERGlmZhBYEg4KCkRvY2tlcmZpbGUQ",
-            "UBIKCgZEeWFsb2cQMhIKCgZFbGl4aXIQERIKCgZFcmxhbmcQEhIKCgZGU2hh",
-            "cnAQKhIICgRGaXNoEEESCAoERmxvdxAYEgsKB0ZvcnRyYW4QOBIOCgpHaXRf",
-            "Q29tbWl0EFsSDgoKR2l0X0NvbmZpZxBZEg4KCkdpdF9SZWJhc2UQXBIGCgJH",
-            "bxAhEgoKBkdyb292eRAHEggKBEhUTUwQHhIICgRIYWNrEBQSDgoKSGFuZGxl",
-            "YmFycxBaEgsKB0hhc2tlbGwQLBIJCgVJZHJpcxAuEgcKA0luaRBIEgUKAUoQ",
-            "MxIICgRKU09OEEsSCAoESmF2YRAGEg4KCkphdmFTY3JpcHQQFhITCg9KYXZh",
-            "U2NyaXB0UmVhY3QQXRILCgdKc29ubmV0EEwSCQoFSnVsaWEQNxIKCgZLb3Rs",
-            "aW4QBBIJCgVMYVRlWBBTEggKBExlYW4QMBIICgRMZXNzEBsSBwoDTHVhEAwS",
-            "DAoITWFrZWZpbGUQTxIMCghNYXJrZG93bhBUEgoKBk1hdGxhYhA0EgcKA05p",
-            "eBBNEgkKBU9DYW1sECkSDwoLT2JqZWN0aXZlX0MQJBIRCg1PYmplY3RpdmVf",
-            "Q1BQECUSBwoDUEhQEBMSCQoFUExTUUwQRhIICgRQZXJsEA0SDgoKUG93ZXJT",
-            "aGVsbBBDEgoKBlByb2xvZxBHEgoKBlB5dGhvbhAPEgUKAVIQNhIKCgZSYWNr",
-            "ZXQQCxIICgRSYWt1EA4SCQoFUmF6b3IQPhIICgRSZVNUEFUSCAoEUnVieRAQ",
-            "EggKBFJ1c3QQKBIHCgNTQVMQPRIICgRTQ1NTEB0SBwoDU01MECsSBwoDU1FM",
-            "EEUSCAoEU2FzcxAcEgkKBVNjYWxhEAUSCgoGU2NoZW1lEAoSDwoLU2hlbGxT",
-            "Y3JpcHQQQBILCgdTa3lsYXJrEE4SCQoFU3dpZnQQAhIICgRUT01MEEkSBwoD",
-            "VGVYEFISDgoKVHlwZVNjcmlwdBAXEhMKD1R5cGVTY3JpcHRSZWFjdBBeEg8K",
-            "C1Zpc3VhbEJhc2ljED8SBwoDVnVlEBkSCwoHV29sZnJhbRA1EgcKA1hNTBAf",
-            "EgcKA1hTTBAgEggKBFlBTUwQShIHCgNaaWcQJkIvWi1naXRodWIuY29tL3Nv",
-            "dXJjZWdyYXBoL3NjaXAvYmluZGluZ3MvZ28vc2NpcC9iBnByb3RvMw=="));
+            "b3N0aWMSFwoPZW5jbG9zaW5nX3JhbmdlGAcgAygFIoABCgpEaWFnbm9zdGlj",
+            "EiAKCHNldmVyaXR5GAEgASgOMg4uc2NpcC5TZXZlcml0eRIMCgRjb2RlGAIg",
+            "ASgJEg8KB21lc3NhZ2UYAyABKAkSDgoGc291cmNlGAQgASgJEiEKBHRhZ3MY",
+            "BSADKA4yEy5zY2lwLkRpYWdub3N0aWNUYWcqMQoPUHJvdG9jb2xWZXJzaW9u",
+            "Eh4KGlVuc3BlY2lmaWVkUHJvdG9jb2xWZXJzaW9uEAAqQAoMVGV4dEVuY29k",
+            "aW5nEhsKF1Vuc3BlY2lmaWVkVGV4dEVuY29kaW5nEAASCAoEVVRGOBABEgkK",
+            "BVVURjE2EAIqfQoKU3ltYm9sUm9sZRIZChVVbnNwZWNpZmllZFN5bWJvbFJv",
+            "bGUQABIOCgpEZWZpbml0aW9uEAESCgoGSW1wb3J0EAISDwoLV3JpdGVBY2Nl",
+            "c3MQBBIOCgpSZWFkQWNjZXNzEAgSDQoJR2VuZXJhdGVkEBASCAoEVGVzdBAg",
+            "KuoGCgpTeW50YXhLaW5kEhkKFVVuc3BlY2lmaWVkU3ludGF4S2luZBAAEgsK",
+            "B0NvbW1lbnQQARIYChRQdW5jdHVhdGlvbkRlbGltaXRlchACEhYKElB1bmN0",
+            "dWF0aW9uQnJhY2tldBADEgsKB0tleXdvcmQQBBIZChFJZGVudGlmaWVyS2V5",
+            "d29yZBAEGgIIARIWChJJZGVudGlmaWVyT3BlcmF0b3IQBRIOCgpJZGVudGlm",
+            "aWVyEAYSFQoRSWRlbnRpZmllckJ1aWx0aW4QBxISCg5JZGVudGlmaWVyTnVs",
+            "bBAIEhYKEklkZW50aWZpZXJDb25zdGFudBAJEhsKF0lkZW50aWZpZXJNdXRh",
+            "YmxlR2xvYmFsEAoSFwoTSWRlbnRpZmllclBhcmFtZXRlchALEhMKD0lkZW50",
+            "aWZpZXJMb2NhbBAMEhYKEklkZW50aWZpZXJTaGFkb3dlZBANEhcKE0lkZW50",
+            "aWZpZXJOYW1lc3BhY2UQDhIYChBJZGVudGlmaWVyTW9kdWxlEA4aAggBEhYK",
+            "EklkZW50aWZpZXJGdW5jdGlvbhAPEiAKHElkZW50aWZpZXJGdW5jdGlvbkRl",
+            "ZmluaXRpb24QEBITCg9JZGVudGlmaWVyTWFjcm8QERIdChlJZGVudGlmaWVy",
+            "TWFjcm9EZWZpbml0aW9uEBISEgoOSWRlbnRpZmllclR5cGUQExIZChVJZGVu",
+            "dGlmaWVyQnVpbHRpblR5cGUQFBIXChNJZGVudGlmaWVyQXR0cmlidXRlEBUS",
+            "DwoLUmVnZXhFc2NhcGUQFhIRCg1SZWdleFJlcGVhdGVkEBcSEQoNUmVnZXhX",
+            "aWxkY2FyZBAYEhIKDlJlZ2V4RGVsaW1pdGVyEBkSDQoJUmVnZXhKb2luEBoS",
+            "EQoNU3RyaW5nTGl0ZXJhbBAbEhcKE1N0cmluZ0xpdGVyYWxFc2NhcGUQHBIY",
+            "ChRTdHJpbmdMaXRlcmFsU3BlY2lhbBAdEhQKEFN0cmluZ0xpdGVyYWxLZXkQ",
+            "HhIUChBDaGFyYWN0ZXJMaXRlcmFsEB8SEgoOTnVtZXJpY0xpdGVyYWwQIBIS",
+            "Cg5Cb29sZWFuTGl0ZXJhbBAhEgcKA1RhZxAiEhAKDFRhZ0F0dHJpYnV0ZRAj",
+            "EhAKDFRhZ0RlbGltaXRlchAkGgIQASpWCghTZXZlcml0eRIXChNVbnNwZWNp",
+            "ZmllZFNldmVyaXR5EAASCQoFRXJyb3IQARILCgdXYXJuaW5nEAISDwoLSW5m",
+            "b3JtYXRpb24QAxIICgRIaW50EAQqTgoNRGlhZ25vc3RpY1RhZxIcChhVbnNw",
+            "ZWNpZmllZERpYWdub3N0aWNUYWcQABIPCgtVbm5lY2Vzc2FyeRABEg4KCkRl",
+            "cHJlY2F0ZWQQAirgCAoITGFuZ3VhZ2USFwoTVW5zcGVjaWZpZWRMYW5ndWFn",
+            "ZRAAEggKBEFCQVAQPBIHCgNBUEwQMRIHCgNBZGEQJxIICgRBZ2RhEC0SDAoI",
+            "QXNjaWlEb2MQVhIMCghBc3NlbWJseRA6EgcKA0F3axBCEgcKA0JhdBBEEgoK",
+            "BkJpYlRlWBBREgUKAUMQIhIJCgVDT0JPTBA7EgcKA0NQUBAjEgcKA0NTUxAa",
+            "EgoKBkNTaGFycBABEgsKB0Nsb2p1cmUQCBIQCgxDb2ZmZWVzY3JpcHQQFRIO",
+            "CgpDb21tb25MaXNwEAkSBwoDQ29xEC8SCAoERGFydBADEgoKBkRlbHBoaRA5",
+            "EggKBERpZmYQWBIOCgpEb2NrZXJmaWxlEFASCgoGRHlhbG9nEDISCgoGRWxp",
+            "eGlyEBESCgoGRXJsYW5nEBISCgoGRlNoYXJwECoSCAoERmlzaBBBEggKBEZs",
+            "b3cQGBILCgdGb3J0cmFuEDgSDgoKR2l0X0NvbW1pdBBbEg4KCkdpdF9Db25m",
+            "aWcQWRIOCgpHaXRfUmViYXNlEFwSBgoCR28QIRIKCgZHcm9vdnkQBxIICgRI",
+            "VE1MEB4SCAoESGFjaxAUEg4KCkhhbmRsZWJhcnMQWhILCgdIYXNrZWxsECwS",
+            "CQoFSWRyaXMQLhIHCgNJbmkQSBIFCgFKEDMSCAoESlNPThBLEggKBEphdmEQ",
+            "BhIOCgpKYXZhU2NyaXB0EBYSEwoPSmF2YVNjcmlwdFJlYWN0EF0SCwoHSnNv",
+            "bm5ldBBMEgkKBUp1bGlhEDcSCgoGS290bGluEAQSCQoFTGFUZVgQUxIICgRM",
+            "ZWFuEDASCAoETGVzcxAbEgcKA0x1YRAMEgwKCE1ha2VmaWxlEE8SDAoITWFy",
+            "a2Rvd24QVBIKCgZNYXRsYWIQNBIHCgNOaXgQTRIJCgVPQ2FtbBApEg8KC09i",
+            "amVjdGl2ZV9DECQSEQoNT2JqZWN0aXZlX0NQUBAlEgcKA1BIUBATEgkKBVBM",
+            "U1FMEEYSCAoEUGVybBANEg4KClBvd2VyU2hlbGwQQxIKCgZQcm9sb2cQRxIK",
+            "CgZQeXRob24QDxIFCgFSEDYSCgoGUmFja2V0EAsSCAoEUmFrdRAOEgkKBVJh",
+            "em9yED4SCAoEUmVTVBBVEggKBFJ1YnkQEBIICgRSdXN0ECgSBwoDU0FTED0S",
+            "CAoEU0NTUxAdEgcKA1NNTBArEgcKA1NRTBBFEggKBFNhc3MQHBIJCgVTY2Fs",
+            "YRAFEgoKBlNjaGVtZRAKEg8KC1NoZWxsU2NyaXB0EEASCwoHU2t5bGFyaxBO",
+            "EgkKBVN3aWZ0EAISCAoEVE9NTBBJEgcKA1RlWBBSEg4KClR5cGVTY3JpcHQQ",
+            "FxITCg9UeXBlU2NyaXB0UmVhY3QQXhIPCgtWaXN1YWxCYXNpYxA/EgcKA1Z1",
+            "ZRAZEgsKB1dvbGZyYW0QNRIHCgNYTUwQHxIHCgNYU0wQIBIICgRZQU1MEEoS",
+            "BwoDWmlnECZCL1otZ2l0aHViLmNvbS9zb3VyY2VncmFwaC9zY2lwL2JpbmRp",
+            "bmdzL2dvL3NjaXAvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Scip.ProtocolVersion), typeof(global::Scip.TextEncoding), typeof(global::Scip.SymbolRole), typeof(global::Scip.SyntaxKind), typeof(global::Scip.Severity), typeof(global::Scip.DiagnosticTag), typeof(global::Scip.Language), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -124,7 +125,7 @@ namespace Scip {
             new pbr::GeneratedClrTypeInfo(typeof(global::Scip.SymbolDescriptor), global::Scip.SymbolDescriptor.Parser, new[]{ "Name", "Disambiguator", "Suffix" }, null, new[]{ typeof(global::Scip.SymbolDescriptor.Types.Suffix) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Scip.SymbolInformation), global::Scip.SymbolInformation.Parser, new[]{ "Symbol", "Documentation", "Relationships" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Scip.Relationship), global::Scip.Relationship.Parser, new[]{ "Symbol", "IsReference", "IsImplementation", "IsTypeDefinition", "IsDefinition" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Scip.Occurrence), global::Scip.Occurrence.Parser, new[]{ "Range", "Symbol", "SymbolRoles", "OverrideDocumentation", "SyntaxKind", "Diagnostics" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Scip.Occurrence), global::Scip.Occurrence.Parser, new[]{ "Range", "Symbol", "SymbolRoles", "OverrideDocumentation", "SyntaxKind", "Diagnostics", "EnclosingRange" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Scip.Diagnostic), global::Scip.Diagnostic.Parser, new[]{ "Severity", "Code", "Message", "Source", "Tags" }, null, null, null, null)
           }));
     }
@@ -199,6 +200,7 @@ namespace Scip {
     /// `if`, `else`, `return`, `class`, etc.
     /// </summary>
     [pbr::OriginalName("Keyword")] Keyword = 4,
+    [global::System.ObsoleteAttribute]
     [pbr::OriginalName("IdentifierKeyword", PreferredAlias = false)] IdentifierKeyword = 4,
     /// <summary>
     /// `+`, `*`, etc.
@@ -243,6 +245,7 @@ namespace Scip {
     /// and a module in languages like Python and JavaScript.
     /// </summary>
     [pbr::OriginalName("IdentifierNamespace")] IdentifierNamespace = 14,
+    [global::System.ObsoleteAttribute]
     [pbr::OriginalName("IdentifierModule", PreferredAlias = false)] IdentifierModule = 14,
     /// <summary>
     /// Function references, including calls
@@ -479,6 +482,7 @@ namespace Scip {
   /// `metadata` field must appear at the start of the stream and must only appear
   /// once in the stream. Other field values may appear in any order.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Index : pb::IMessage<Index>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -686,7 +690,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -716,7 +724,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -742,6 +754,7 @@ namespace Scip {
 
   }
 
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Metadata : pb::IMessage<Metadata>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1002,7 +1015,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1036,7 +1053,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1066,6 +1087,7 @@ namespace Scip {
 
   }
 
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class ToolInfo : pb::IMessage<ToolInfo>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1277,7 +1299,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1304,7 +1330,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1330,6 +1360,7 @@ namespace Scip {
   /// <summary>
   /// Document defines the metadata about a source file on disk.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Document : pb::IMessage<Document>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1577,7 +1608,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1608,7 +1643,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1673,6 +1712,7 @@ namespace Scip {
   /// for every node in the AST (along the ancestry path) between the root of
   /// the file and the node corresponding to the symbol.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Symbol : pb::IMessage<Symbol>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1878,7 +1918,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1908,7 +1952,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1939,6 +1987,7 @@ namespace Scip {
   ///
   /// NOTE: This corresponds to a module in Go and JVM languages.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Package : pb::IMessage<Package>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2152,7 +2201,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2179,7 +2232,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2202,6 +2259,7 @@ namespace Scip {
 
   }
 
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class SymbolDescriptor : pb::IMessage<SymbolDescriptor>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2415,7 +2473,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2442,7 +2504,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2479,6 +2545,7 @@ namespace Scip {
         /// <summary>
         /// Use Namespace instead.
         /// </summary>
+        [global::System.ObsoleteAttribute]
         [pbr::OriginalName("Package", PreferredAlias = false)] Package = 1,
         [pbr::OriginalName("Type")] Type = 2,
         [pbr::OriginalName("Term")] Term = 3,
@@ -2502,6 +2569,7 @@ namespace Scip {
   /// SymbolInformation defines metadata about a symbol, such as the symbol's
   /// docstring or what package it's defined it.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class SymbolInformation : pb::IMessage<SymbolInformation>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2706,7 +2774,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2733,7 +2805,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2756,6 +2832,7 @@ namespace Scip {
 
   }
 
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Relationship : pb::IMessage<Relationship>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3084,7 +3161,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3119,7 +3200,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3157,6 +3242,7 @@ namespace Scip {
   /// If possible, indexers should try to bundle logically related information
   /// across occurrences into a single occurrence to reduce payload sizes.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Occurrence : pb::IMessage<Occurrence>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3197,6 +3283,7 @@ namespace Scip {
       overrideDocumentation_ = other.overrideDocumentation_.Clone();
       syntaxKind_ = other.syntaxKind_;
       diagnostics_ = other.diagnostics_.Clone();
+      enclosingRange_ = other.enclosingRange_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3319,6 +3406,24 @@ namespace Scip {
       get { return diagnostics_; }
     }
 
+    /// <summary>Field number for the "enclosing_range" field.</summary>
+    public const int EnclosingRangeFieldNumber = 7;
+    private static readonly pb::FieldCodec<int> _repeated_enclosingRange_codec
+        = pb::FieldCodec.ForInt32(58);
+    private readonly pbc::RepeatedField<int> enclosingRange_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// (optional) Using the same encoding as the sibling `range` field, half-open
+    /// source range of the nearest non-trivial enclosing AST node. This range must
+    /// enclose the `range` field. For a definition occurrence it is the whole
+    /// declaration -- a method's body included -- so a reference inside it can be
+    /// attributed to the innermost definition that encloses it.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<int> EnclosingRange {
+      get { return enclosingRange_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3340,6 +3445,7 @@ namespace Scip {
       if(!overrideDocumentation_.Equals(other.overrideDocumentation_)) return false;
       if (SyntaxKind != other.SyntaxKind) return false;
       if(!diagnostics_.Equals(other.diagnostics_)) return false;
+      if(!enclosingRange_.Equals(other.enclosingRange_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3353,6 +3459,7 @@ namespace Scip {
       hash ^= overrideDocumentation_.GetHashCode();
       if (SyntaxKind != global::Scip.SyntaxKind.UnspecifiedSyntaxKind) hash ^= SyntaxKind.GetHashCode();
       hash ^= diagnostics_.GetHashCode();
+      hash ^= enclosingRange_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3386,6 +3493,7 @@ namespace Scip {
         output.WriteEnum((int) SyntaxKind);
       }
       diagnostics_.WriteTo(output, _repeated_diagnostics_codec);
+      enclosingRange_.WriteTo(output, _repeated_enclosingRange_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3411,6 +3519,7 @@ namespace Scip {
         output.WriteEnum((int) SyntaxKind);
       }
       diagnostics_.WriteTo(ref output, _repeated_diagnostics_codec);
+      enclosingRange_.WriteTo(ref output, _repeated_enclosingRange_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3433,6 +3542,7 @@ namespace Scip {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SyntaxKind);
       }
       size += diagnostics_.CalculateSize(_repeated_diagnostics_codec);
+      size += enclosingRange_.CalculateSize(_repeated_enclosingRange_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3457,6 +3567,7 @@ namespace Scip {
         SyntaxKind = other.SyntaxKind;
       }
       diagnostics_.Add(other.diagnostics_);
+      enclosingRange_.Add(other.enclosingRange_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3468,7 +3579,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3497,6 +3612,11 @@ namespace Scip {
             diagnostics_.AddEntriesFrom(input, _repeated_diagnostics_codec);
             break;
           }
+          case 58:
+          case 56: {
+            enclosingRange_.AddEntriesFrom(input, _repeated_enclosingRange_codec);
+            break;
+          }
         }
       }
     #endif
@@ -3508,7 +3628,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3537,6 +3661,11 @@ namespace Scip {
             diagnostics_.AddEntriesFrom(ref input, _repeated_diagnostics_codec);
             break;
           }
+          case 58:
+          case 56: {
+            enclosingRange_.AddEntriesFrom(ref input, _repeated_enclosingRange_codec);
+            break;
+          }
         }
       }
     }
@@ -3548,6 +3677,7 @@ namespace Scip {
   /// Represents a diagnostic, such as a compiler error or warning, which should be
   /// reported for a document.
   /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class Diagnostic : pb::IMessage<Diagnostic>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3821,7 +3951,11 @@ namespace Scip {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3857,7 +3991,11 @@ namespace Scip {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;

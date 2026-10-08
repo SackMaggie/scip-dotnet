@@ -163,41 +163,41 @@
 //                                                        ^^^^ reference local 21
 //                                                               ^^^^^^^^ reference local 22
           T Echo<T>(T value) => value;
-//        ^ reference local 24
-//          ^^^^ definition local 23
+//        ^ reference local 23
+//          ^^^^ definition scip-dotnet nuget . . Main/GenericNameUsage#Invoke().Echo().
 //               documentation ```cs\nT Echo<T>(T value)\n```
-//               ^ definition local 24
+//               ^ definition local 23
 //                 documentation ```cs\nT\n```
-//                  ^ reference local 24
-//                    ^^^^^ definition local 25
+//                  ^ reference local 23
+//                    ^^^^^ definition scip-dotnet nuget . . Main/GenericNameUsage#Invoke().Echo().(value)
 //                          documentation ```cs\nT value\n```
-//                              ^^^^^ reference local 25
+//                              ^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#Invoke().Echo().(value)
           var echoed = Echo<int>(1);
-//            ^^^^^^ definition local 26
+//            ^^^^^^ definition local 24
 //                   documentation ```cs\nint echoed\n```
-//                     ^^^^ reference local 23
+//                     ^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#Invoke().Echo().
           var inferredEcho = Echo(2);
-//            ^^^^^^^^^^^^ definition local 27
+//            ^^^^^^^^^^^^ definition local 25
 //                         documentation ```cs\nint inferredEcho\n```
-//                           ^^^^ reference local 23
+//                           ^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#Invoke().Echo().
           var ints = _items.OfType<int>().ToList();
-//            ^^^^ definition local 28
+//            ^^^^ definition local 26
 //                 documentation ```cs\nList<int>? ints\n```
 //                   ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_items.
 //                          ^^^^^^ reference scip-dotnet nuget System.Linq 8.0.0.0 Linq/Enumerable#OfType().
 //                                        ^^^^^^ reference scip-dotnet nuget System.Linq 8.0.0.0 Linq/Enumerable#ToList().
           var unbound = typeof(List<>);
-//            ^^^^^^^ definition local 29
+//            ^^^^^^^ definition local 27
 //                    documentation ```cs\nType? unbound\n```
 //                             ^^^^ reference scip-dotnet nuget System.Collections 8.0.0.0 Generic/List#
           IEnumerable<int> sequence = _items;
 //        ^^^^^^^^^^^ reference scip-dotnet nuget System.Runtime 8.0.0.0 Generic/IEnumerable#
-//                         ^^^^^^^^ definition local 30
+//                         ^^^^^^^^ definition local 28
 //                                  documentation ```cs\nIEnumerable<int> sequence\n```
 //                                    ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_items.
           _index[converted] = ints;
 //        ^^^^^^ reference scip-dotnet nuget . . Main/GenericNameUsage#_index.
 //               ^^^^^^^^^ reference local 8
-//                            ^^^^ reference local 28
+//                            ^^^^ reference local 26
       }
   }

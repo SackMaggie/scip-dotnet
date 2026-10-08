@@ -249,6 +249,11 @@ public class ScipDocumentIndexer
 
         if (!isDefinition) return;
 
+        foreach (var range in EnclosingRange(symbol, location))
+        {
+            occurrence.EnclosingRange.Add(range);
+        }
+
         // Emit SymbolInformation for this definition occurrence.
         var info = new SymbolInformation { Symbol = scipSymbol };
         _doc.Symbols.Add(info);
@@ -350,6 +355,22 @@ public class ScipDocumentIndexer
         }
     }
 
+    // The whole declaration a definition names -- a method's or local function's body, a type's
+    // members -- from the declaring syntax in the same file that holds the definition's name. Empty
+    // for a symbol with no body to enclose anything (a field, a parameter, a local).
+    private static IEnumerable<int> EnclosingRange(ISymbol symbol, Location location)
+    {
+        if (symbol is not (IMethodSymbol or INamedTypeSymbol or IPropertySymbol or IEventSymbol))
+        {
+            return Array.Empty<int>();
+        }
+
+        var declaration = symbol.DeclaringSyntaxReferences
+            .Select(reference => reference.GetSyntax())
+            .FirstOrDefault(node => node.SyntaxTree == location.SourceTree && node.Span.Contains(location.SourceSpan));
+        return declaration is null ? Array.Empty<int>() : LocationToRange(declaration.GetLocation());
+    }
+
     // Converts a Roslyn location into a SCIP range.
     private static IEnumerable<int> LocationToRange(Location location)
     {
@@ -375,10 +396,12 @@ public class ScipDocumentIndexer
 
     private static bool IsLocalSymbol(ISymbol sym)
     {
+        // A local function is NOT local here: it is a named member of the method that declares it,
+        // so it is emitted under that method's symbol (`Program#<Main>$().ReadZip().`) and a call
+        // inside its body can be attributed to it rather than to the file or its container.
         return sym.Kind == SymbolKind.Local ||
                sym.Kind == SymbolKind.RangeVariable ||
                sym.Kind == SymbolKind.TypeParameter ||
-               sym is IMethodSymbol { MethodKind: MethodKind.LocalFunction } ||
                // Anonymous classes/methods have empty names and can not be accessed outside their file.
                // The "global namespace" (parent of all namespaces) also has an empty name and should not
                // be treated as a local variable.

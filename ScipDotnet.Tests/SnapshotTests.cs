@@ -127,6 +127,28 @@ public class SnapshotTests
         return sb.ToString();
     }
 
+    // A definition of a member with a body carries enclosing_range -- the whole declaration -- so a
+    // consumer can attribute each reference to the innermost definition around it; a local function
+    // is a named member of its method, and its own definition sits inside the method's range.
+    [Test]
+    public void ADefinitionCarriesItsDeclarationAsEnclosingRangeAndALocalFunctionNestsInsideItsMethod()
+    {
+        var input = Path.Join(RootDirectory(), "snapshots", "input", "syntax");
+        var index = Index.Parser.ParseFrom(File.ReadAllBytes(IndexDirectory(input)));
+        var methods = index.Documents.First(d => d.RelativePath.EndsWith("Methods.cs", StringComparison.Ordinal));
+        Occurrence Definition(string suffix) => methods.Occurrences.Single(o =>
+            o.Symbol.EndsWith(suffix, StringComparison.Ordinal) && (o.SymbolRoles & (int)SymbolRole.Definition) != 0);
+
+        var method = Definition("Main/Methods#LocalFunction#Method().");
+        var local = Definition("Main/Methods#LocalFunction#Method().GetWorld().");
+
+        Assert.That(method.EnclosingRange, Is.Not.Empty);
+        Assert.That(local.EnclosingRange, Is.Not.Empty);
+        var outer = Range.FromRaw(method.EnclosingRange);
+        Assert.That(outer.CompareTo(Range.FromOccurrence(local)), Is.LessThan(0));
+        Assert.That(Range.FromRaw(local.EnclosingRange).End.CompareTo(outer.End), Is.LessThanOrEqualTo(0));
+    }
+
     private static string[] ListSnapshotInputDirectories()
     {
         var inputs = Path.Join(RootDirectory(), "snapshots", "input");
