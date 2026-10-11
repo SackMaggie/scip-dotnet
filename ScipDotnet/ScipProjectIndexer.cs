@@ -20,9 +20,9 @@ public class ScipProjectIndexer
 
     private (string Status, int? ExitCode) Restore(IndexCommandOptions options, FileInfo project)
     {
-        var isSolution = project.Extension.Equals(".sln", StringComparison.OrdinalIgnoreCase)
-                      || project.Extension.Equals(".slnx", StringComparison.OrdinalIgnoreCase);
-        var arguments = isSolution ? $"restore {project.FullName} /p:EnableWindowsTargeting=true" : "restore /p:EnableWindowsTargeting=true";
+        // Every root is restored by its own path: a bare `dotnet restore` reads the working directory,
+        // which holds no project when the root sits below it, so the project went unrestored (MSB1003).
+        var arguments = $"restore \"{project.FullName}\" /p:EnableWindowsTargeting=true";
         if (options.NugetConfigPath != null)
         {
             arguments += $" --configfile \"{options.NugetConfigPath.FullName}\"";

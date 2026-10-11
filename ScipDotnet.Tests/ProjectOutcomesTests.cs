@@ -53,6 +53,19 @@ public class ProjectOutcomesTests
         }
     }
 
+    [Test]
+    public void AProjectRootBelowTheWorkingDirectoryIsRestoredByItsPath()
+    {
+        // A .csproj root used to be restored with a bare `dotnet restore` in the working directory,
+        // which holds no project here (MSB1003), so the project was indexed with nothing restored.
+        var outcomes = Index("nested-project", "src/Nested/Nested.csproj");
+
+        var root = outcomes.GetProperty("roots").EnumerateArray().Single();
+        Assert.That(root.GetProperty("restore").GetString(), Is.EqualTo("succeeded"));
+        Assert.That(ByProject(outcomes)["src/Nested/Nested.csproj"].GetProperty("status").GetString(),
+            Is.EqualTo("indexed"));
+    }
+
     private static Dictionary<string, JsonElement> ByProject(JsonElement outcomes) =>
         outcomes.GetProperty("projects").EnumerateArray()
             .ToDictionary(p => p.GetProperty("project").GetString()!, p => p);
